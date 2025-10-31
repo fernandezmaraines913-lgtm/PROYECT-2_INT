@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV - Mara Ines Fernandes</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            animation: gradientShift 15s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+            50% { background: linear-gradient(135deg, #764ba2 0%, #667eea 100%); }
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+            animation: slideIn 0.8s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 60px 40px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: pulse 8s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            50% { transform: scale(1.1) rotate(180deg); }
+        }
+
+        .profile-photo {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ffd89b 0%, #19547b 100%);
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 60px;
+            color: white;
+            border: 5px solid rgba(255,255,255,0.3);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            position: relative;
+            z-index: 1;
+            animation: photoFloat 3s ease-in-out infinite;
+        }
+
+        @keyframes photoFloat {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .subtitle {
+            font-size: 1.2em;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+
+        .actions {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 10px;
+            z-index: 2;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .btn-whatsapp {
+            background: #25D366;
+            color: white;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+        }
+
+        .btn-whatsapp:hover {
+            background: #20ba5a;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.6);
+        }
+
+        .btn-download {
+            background: white;
+            color: #667eea;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .btn-download:hover {
+            background: #f0f0f0;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .section {
+            margin-bottom: 40px;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .section-title {
+            color: #667eea;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #667eea;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .info-item:hover {
+            transform: translateX(10px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .info-item i {
+            color: #667eea;
+            font-size: 1.2em;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .skill-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 70%);
+            transform: scale(0);
+            transition: transform 0.6s ease;
+        }
+
+        .skill-card:hover::before {
+            transform: scale(1);
+        }
+
+        .skill-card:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .skill-card i {
+            font-size: 2em;
+            margin-bottom: 10px;
+            display: block;
+            position: relative;
+            z-index: 1;
+        }
+
+        .skill-name {
+            font-weight: 600;
+            font-size: 1.1em;
+            position: relative;
+            z-index: 1;
+        }
+
+        .experience-item {
+            padding: 20px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 15px;
+            margin-bottom: 20px;
+            border-left: 5px solid #667eea;
+            transition: all 0.3s ease;
+        }
+
+        .experience-item:hover {
+            transform: translateX(10px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .experience-title {
+            font-size: 1.3em;
+            color: #667eea;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+
+        .experience-company {
+            color: #764ba2;
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+
+        textarea {
+            width: 100%;
+            min-height: 120px;
+            padding: 15px;
+            border: 2px solid #667eea;
+            border-radius: 10px;
+            font-family: inherit;
+            font-size: 1em;
+            resize: vertical;
+            transition: all 0.3s ease;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: #764ba2;
+            box-shadow: 0 0 15px rgba(102, 126, 234, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .actions {
+                position: static;
+                justify-content: center;
+                margin-top: 20px;
+                flex-wrap: wrap;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            .content {
+                padding: 20px;
+            }
+
+            .btn {
+                font-size: 14px;
+                padding: 10px 20px;
+            }
+        }
+
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            .actions {
+                display: none !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="cv-content">
+        <div class="header">
+            <div class="actions">
+                <a href="https://wa.me/5493764000000" class="btn btn-whatsapp" target="_blank">
+                    <i class="fab fa-whatsapp"></i> WhatsApp
+                </a>
+                <button class="btn btn-download" onclick="descargarPDF()">
+                    <i class="fas fa-download"></i> Descargar PDF
+                </button>
+            </div>
+            <div class="profile-photo">
+                <i class="fas fa-user"></i>
+            </div>
+            <h1>Mara Ines Fernandes</h1>
+            <p class="subtitle">Profesional en Busca de Nuevos Desafíos</p>
+        </div>
+
+        <div class="content">
+            <div class="section">
+                <h2 class="section-title">
+                    <i class="fas fa-info-circle"></i>
+                    Información Personal
+                </h2>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Posadas, Misiones, Argentina</span>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>mara.fernandes@email.com</span>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-phone"></i>
+                        <span>+54 9 376 400-0000</span>
+                    </div>
+                    <div class="info-item">
+                        <i class="fab fa-linkedin"></i>
+                        <span>linkedin.com/in/marafernandes</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">
+                    <i class="fas fa-user-circle"></i>
+                    Perfil Profesional
+                </h2>
+                <textarea id="perfil" placeholder="Describe brevemente tu perfil profesional, objetivos y aspiraciones...">Profesional comprometida con excelencia en cada proyecto. Mi enfoque se centra en generar valor agregado mediante soluciones efectivas y trabajo colaborativo. Busco oportunidades donde pueda aplicar mis capacidades para contribuir al crecimiento organizacional.</textarea>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">
+                    <i class="fas fa-star"></i>
+                    Competencias Clave
+                </h2>
+                <div class="skills-grid">
+                    <div class="skill-card">
+                        <i class="fas fa-tasks"></i>
+                        <div class="skill-name">Organización Eficiente</div>
+                    </div>
+                    <div class="skill-card">
+                        <i class="fas fa-users"></i>
+                        <div class="skill-name">Trabajo en Equipo</div>
+                    </div>
+                    <div class="skill-card">
+                        <i class="fas fa-lightbulb"></i>
+                        <div class="skill-name">Resolución de Problemas</div>
+                    </div>
+                    <div class="skill-card">
+                        <i class="fas fa-chart-line"></i>
+                        <div class="skill-name">Orientación a Resultados</div>
+                    </div>
+                    <div class="skill-card">
+                        <i class="fas fa-sync"></i>
+                        <div class="skill-name">Flexibilidad</div>
+                    </div>
+                    <div class="skill-card">
+                        <i class="fas fa-handshake"></i>
+                        <div class="skill-name">Habilidades Interpersonales</div>
+                    </div>
+                    <div class="skill-card">
+                        <i class="fas fa-brain"></i>
+                        <div class="skill-name">Pensamiento Crítico</div>
+                    </div>
+                    <div class="skill-card">
+                        <i class="fas fa-rocket"></i>
+                        <div class="skill-name">Proactividad</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">
+                    <i class="fas fa-briefcase"></i>
+                    Experiencia Laboral
+                </h2>
+                <div class="experience-item">
+                    <div class="experience-title">Título del Puesto</div>
+                    <div class="experience-company">Nombre de la Empresa | Mes Año - Presente</div>
+                    <textarea placeholder="Describe tus responsabilidades, logros y contribuciones en este puesto...">• Gestión integral de proyectos desde la planificación hasta la ejecución
+• Coordinación efectiva con equipos multidisciplinarios
+• Implementación de mejoras en procesos operativos</textarea>
+                </div>
+                <div class="experience-item">
+                    <div class="experience-title">Puesto Anterior</div>
+                    <div class="experience-company">Empresa Anterior | Mes Año - Mes Año</div>
+                    <textarea placeholder="Describe tus responsabilidades y logros...">• Desarrollo de estrategias para optimización de recursos
+• Atención y seguimiento de stakeholders clave
+• Colaboración en la consecución de objetivos organizacionales</textarea>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">
+                    <i class="fas fa-graduation-cap"></i>
+                    Formación Académica
+                </h2>
+                <div class="experience-item">
+                    <div class="experience-title">Título Universitario/Terciario</div>
+                    <div class="experience-company">Institución Educativa | Año de Graduación</div>
+                    <textarea placeholder="Detalles de tu formación académica...">Especialización en [tu área de estudio]</textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function descargarPDF() {
+            const elemento = document.getElementById('cv-content');
+            const acciones = document.querySelector('.actions');
+            
+            acciones.style.display = 'none';
+            
+            const opciones = {
+                margin: 10,
+                filename: 'CV_Mara_Fernandes.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2, useCORS: true },
+                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+            };
+            
+            html2pdf().set(opciones).from(elemento).save().then(() => {
+                acciones.style.display = 'flex';
+            });
+        }
+
+        document.querySelectorAll('textarea').forEach(textarea => {
+            textarea.addEventListener('input', function() {
+                this.style.height = 'auto';
+                this.style.height = this.scrollHeight + 'px';
+            });
+            
+            textarea.style.height = textarea.scrollHeight + 'px';
+        });
+
+        document.querySelectorAll('.skill-card').forEach(card => {
+            card.addEventListener('click', function() {
+                this.style.animation = 'none';
+                setTimeout(() => {
+                    this.style.animation = '';
+                }, 10);
+            });
+        });
+    </script>
+</body>
+</html>
